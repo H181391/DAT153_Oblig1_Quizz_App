@@ -1,7 +1,9 @@
 package com.example.sondre.oblig_1_name_quizz
 
+import android.provider.ContactsContract
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
+
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,6 +17,10 @@ import org.junit.Assert.*
  */
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
+    private lateinit var userDao: PersonDao
+
+   // val db = AppDatabase.getInstance(InstrumentationRegistry.getTargetContext())
+    var dbTest: TestDatabase = TestDatabase.getInstance(InstrumentationRegistry.getTargetContext())!!
 
     @Test
     fun useAppContext() {
@@ -22,4 +28,33 @@ class ExampleInstrumentedTest {
         val appContext = InstrumentationRegistry.getTargetContext()
         assertEquals("com.example.sondre.oblig_1_name_quizz", appContext.packageName)
     }
+
+    @Test
+    fun addAndDeletePerson() {
+
+        val Atle = Person(1,"atle", "picPath")
+        val Sondre = Person(2,"Sondre", "picPath")
+
+        dbTest?.personDao()?.insertPerson(Atle)
+        dbTest?.personDao()?.insertPerson(Sondre)
+        var personFromDatabase = dbTest?.personDao()?.findByName(1)
+        var personFromDatabase2 = dbTest?.personDao()?.findByName(2)
+
+        //Check to see if person added to database
+        assertEquals(Atle, personFromDatabase)
+        assertEquals(Sondre, personFromDatabase2)
+
+
+        //Delete the persons from the database
+        dbTest?.personDao()?.delete(Atle)
+        dbTest?.personDao()?.delete(Sondre)
+        personFromDatabase = dbTest?.personDao()?.findByName(1)
+        personFromDatabase2 = dbTest?.personDao()?.findByName(2)
+
+        //Check if the persons are deleted
+        assertEquals(null, personFromDatabase)
+        assertEquals(null, personFromDatabase2)
+    }
+
+
 }

@@ -79,11 +79,7 @@ class DataActivity : AppCompatActivity() {
                 deleteButton.setText("Delete " + personList.get(i).first_name)
                 layout.addView(deleteButton)
                 deleteButton.setOnClickListener {
-                    db?.personDao()?.delete(personList.get(i))
-                    val toast = Toast.makeText(this, "Person deleted", Toast.LENGTH_LONG)
-                    toast.show()
-                    intent = Intent(this, DataActivity::class.java)
-                    startActivity(intent)
+                    deletePerson(personList.get(i))
                 }
 
                 //Dekoder bildet
@@ -94,6 +90,14 @@ class DataActivity : AppCompatActivity() {
         }
 
 
+    }
+
+        fun deletePerson(person: Person) {
+        db?.personDao()?.delete(person)
+        val toast = Toast.makeText(this, "Person deleted", Toast.LENGTH_LONG)
+        toast.show()
+        intent = Intent(this, DataActivity::class.java)
+        startActivity(intent)
     }
 
     fun addNewPictureAlert() {

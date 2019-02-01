@@ -5,6 +5,8 @@ import kotlin.test.assertEquals
 
 class QuizActivityTest {
 
+    //val db: AppDatabase? = AppDatabase.getInstance(this)
+
     @Test
     fun checkAnswerInQuiz() {
         val navn = "Atle"
@@ -23,5 +25,12 @@ class QuizActivityTest {
         score = QuizActivity().updateScore()
         assertEquals(score, 1, "1 and 1")
     }
+
+    @Test
+    fun addAndDeletePerson() {
+        val person = Person(4, "atle", "")
+       // db?.personDao()?.insertPerson(person)
+    }
+
 
 }
