@@ -44,16 +44,22 @@ class ExampleInstrumentedTest {
         assertEquals(Atle, personFromDatabase)
         assertEquals(Sondre, personFromDatabase2)
 
+        var personList = dbTest.personDao().getAll()
+        assertEquals(2, personList.size)
 
         //Delete the persons from the database
         dbTest?.personDao()?.delete(Atle)
         dbTest?.personDao()?.delete(Sondre)
+
         personFromDatabase = dbTest?.personDao()?.findByName(1)
         personFromDatabase2 = dbTest?.personDao()?.findByName(2)
 
+        personList = dbTest?.personDao()?.getAll()
         //Check if the persons are deleted
         assertEquals(null, personFromDatabase)
         assertEquals(null, personFromDatabase2)
+        assertEquals(0, personList.size)
+
     }
 
 

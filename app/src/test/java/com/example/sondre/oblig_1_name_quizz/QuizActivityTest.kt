@@ -20,10 +20,10 @@ class QuizActivityTest {
 
     @Test
     fun checkScoreUpdate() {
-        var score = 3
+
        //var quizActivity : QuizActivity().
-        score = QuizActivity().updateScore()
-        assertEquals(score, 1, "1 and 1")
+        var score = QuizActivity().updateScore()
+        assertEquals(1, score, "1 and 1")
     }
 
     @Test
