@@ -15,10 +15,10 @@ import org.junit.Assert.*
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @RunWith(AndroidJUnit4::class)
-class ExampleInstrumentedTest {
+class DatabaseTest {
     private lateinit var userDao: PersonDao
 
-   // val db = AppDatabase.getInstance(InstrumentationRegistry.getTargetContext())
+    // val db = AppDatabase.getInstance(InstrumentationRegistry.getTargetContext())
     var dbTest: TestDatabase = TestDatabase.getInstance(InstrumentationRegistry.getTargetContext())!!
 
     @Test
