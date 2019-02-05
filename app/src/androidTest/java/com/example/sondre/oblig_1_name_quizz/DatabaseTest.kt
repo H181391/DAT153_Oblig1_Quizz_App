@@ -61,5 +61,40 @@ class DatabaseTest {
 
     }
 
+    @Test
+    fun addPersonDatabase() {
+        val Atle = Person(1, "atle", "picPath")
+        dbTest?.personDao()?.insertPerson(Atle)
+        val personFromDatabase =  dbTest?.personDao()?.findByName(1)
+        assertEquals(Atle, personFromDatabase)
+    }
+
+    @Test
+    fun deletePersonDatabase() {
+        val Atle = Person(1, "atle", "picPath")
+        dbTest?.personDao()?.insertPerson(Atle)
+        var personFromDatabase =  dbTest?.personDao()?.findByName(1)
+        assertEquals(Atle, personFromDatabase)
+
+        dbTest?.personDao()?.delete(Atle)
+        personFromDatabase =  dbTest?.personDao()?.findByName(1)
+        assertEquals(null, personFromDatabase)
+
+    }
+
+    @Test
+    fun checkDatabaseList() {
+        val Atle = Person(1, "atle", "picPath")
+        val Sondre = Person(2, "Sondre", "picPath")
+
+        dbTest?.personDao()?.insertPerson(Atle)
+        dbTest?.personDao()?.insertPerson(Sondre)
+
+        var personList = dbTest.personDao().getAll()
+        assertEquals(2, personList.size)
+    }
+
+
+
 
 }

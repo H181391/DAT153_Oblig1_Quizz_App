@@ -25,10 +25,7 @@ class QuizActivityTest {
         assertEquals(1, score, "1 and 1")
     }
 
-    @Test
-    fun addAndDeletePerson() {
 
-    }
 
 
 }
