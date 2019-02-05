@@ -9,26 +9,27 @@ import android.widget.Toast
 import android.os.AsyncTask
 
 
-
 @Database(entities = arrayOf(Person::class), version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun personDao(): PersonDao
 
 
-        companion object {
+    companion object {
 
-            private var INSTANCE: AppDatabase? = null
-            fun getInstance(context: Context): AppDatabase? {
-                if (INSTANCE == null) {
-                    synchronized(AppDatabase::class) {
-                        INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+        private var INSTANCE: AppDatabase? = null
+        fun getInstance(context: Context): AppDatabase? {
+            if (INSTANCE == null) {
+                synchronized(AppDatabase::class) {
+                    INSTANCE = Room.databaseBuilder(
+                        context.getApplicationContext(),
 
-                            //AllowMainThreadQueries er dårlig valg, børr byttes ut...
-                            AppDatabase::class.java, "person.db").allowMainThreadQueries().build()
-                    }
+                        //AllowMainThreadQueries er dårlig valg, børr byttes ut...
+                        AppDatabase::class.java, "person.db"
+                    ).allowMainThreadQueries().build()
                 }
-                   return INSTANCE
-                    }
-
+            }
+            return INSTANCE
         }
+
+    }
 }

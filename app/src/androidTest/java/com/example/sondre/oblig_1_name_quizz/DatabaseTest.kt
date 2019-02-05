@@ -31,8 +31,8 @@ class DatabaseTest {
     @Test
     fun addAndDeletePerson() {
 
-        val Atle = Person(1,"atle", "picPath")
-        val Sondre = Person(2,"Sondre", "picPath")
+        val Atle = Person(1, "atle", "picPath")
+        val Sondre = Person(2, "Sondre", "picPath")
 
         dbTest?.personDao()?.insertPerson(Atle)
         dbTest?.personDao()?.insertPerson(Sondre)

@@ -44,7 +44,7 @@ class AddPicture : Activity() {
         dispatchTakePictureIntent()
 
         val newPicture = findViewById<Button>(R.id.newPhoto)
-        newPicture.setOnClickListener{
+        newPicture.setOnClickListener {
             dispatchTakePictureIntent()
         }
 
@@ -66,6 +66,7 @@ class AddPicture : Activity() {
 
         }
     }
+
     private fun dispatchTakePictureIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             // Ensure that there's a camera activity to handle the intent
@@ -92,7 +93,7 @@ class AddPicture : Activity() {
     }
 
     //Etter bildet er tatt...
-    override fun onActivityResult(c:Int,r:Int,data:Intent){
+    override fun onActivityResult(c: Int, r: Int, data: Intent) {
         if (c == REQUEST_TAKE_PHOTO && r == RESULT_OK) {
             val person = Person()
             //val person = Person(uid = 0, first_name = "Atle", picturePath = mCurrentPhotoPath)
@@ -121,15 +122,15 @@ class AddPicture : Activity() {
             //Deklarering av knapp
             val btn = Button(this)
             btn.setText(R.string.addPerson)
-            btn.gravity=Gravity.CENTER
+            btn.gravity = Gravity.CENTER
             layout.addView(btn)
 
 
             //Legger til personen i databasen
-            btn.setOnClickListener{v: View? ->
-                person.first_name=editText.text.toString()
-                person.picturePath=mCurrentPhotoPath
-                person.uid=0
+            btn.setOnClickListener { v: View? ->
+                person.first_name = editText.text.toString()
+                person.picturePath = mCurrentPhotoPath
+                person.uid = 0
                 Log.i("Ours", "TEST" + person)
                 db?.personDao()?.insertPerson(person)
 
@@ -140,27 +141,26 @@ class AddPicture : Activity() {
             }
 
 
-
             //Dekoder bildet
-            val bmImg:Bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath)
+            val bmImg: Bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath)
             imageView.setImageBitmap(bmImg)
 
         }
 
-}
+    }
+
     //
     fun addedToDataBaseAlert() {
 
-        val builder: AlertDialog.Builder? = this@AddPicture?.let { AlertDialog.Builder(it)}
+        val builder: AlertDialog.Builder? = this@AddPicture?.let { AlertDialog.Builder(it) }
 
         builder?.setMessage(R.string.personAdded)?.setTitle(R.string.personAdded)
 
-        builder?.setPositiveButton("Ok"){dialog, which ->
+        builder?.setPositiveButton("Ok") { dialog, which ->
             //Brukeren trykket på ok knappen
             intent = Intent(this, DataActivity::class.java)
             startActivity(intent)
         }
-
 
 
         val dialog: AlertDialog? = builder?.create()

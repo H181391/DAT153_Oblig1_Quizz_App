@@ -18,10 +18,6 @@ interface PersonDao {
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         fun insertPerson(person: Person)
 
-        /*
-        @Insert(onConflict = OnConflictStrategy.REPLACE)
-        fun insertAll(vararg persons: Person)
-*/
         @Delete
         fun delete(person: Person)
 

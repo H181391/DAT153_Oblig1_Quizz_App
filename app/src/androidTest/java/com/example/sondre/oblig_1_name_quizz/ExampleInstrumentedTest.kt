@@ -18,7 +18,7 @@ import org.junit.Assert.*
 class ExampleInstrumentedTest {
     private lateinit var userDao: PersonDao
 
-   // val db = AppDatabase.getInstance(InstrumentationRegistry.getTargetContext())
+    // val db = AppDatabase.getInstance(InstrumentationRegistry.getTargetContext())
     var dbTest: TestDatabase = TestDatabase.getInstance(InstrumentationRegistry.getTargetContext())!!
 
     @Test
@@ -31,8 +31,8 @@ class ExampleInstrumentedTest {
     @Test
     fun addAndDeletePerson() {
 
-        val Atle = Person(1,"atle", "picPath")
-        val Sondre = Person(2,"Sondre", "picPath")
+        val Atle = Person(1, "atle", "picPath")
+        val Sondre = Person(2, "Sondre", "picPath")
 
         dbTest?.personDao()?.insertPerson(Atle)
         dbTest?.personDao()?.insertPerson(Sondre)

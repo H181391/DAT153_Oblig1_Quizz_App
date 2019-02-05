@@ -24,7 +24,7 @@ import org.w3c.dom.Text
 class QuizActivity : AppCompatActivity() {
 
     private var db: AppDatabase? = null
-    private var theScore : Int = 0
+    private var theScore: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +41,7 @@ class QuizActivity : AppCompatActivity() {
         var imageView = ImageView(this)
 
         //Deklarerer listen bestående av alle person objektene
-        val personList : List<Person>? = db?.personDao()?.getAll()
+        val personList: List<Person>? = db?.personDao()?.getAll()
 
 
         val layout = findViewById(R.id.quizLinear) as LinearLayout
@@ -52,17 +52,17 @@ class QuizActivity : AppCompatActivity() {
         layout.addView(imageView)
 
 
-        var name : String? = ""
-        var path : String? = ""
+        var name: String? = ""
+        var path: String? = ""
 
 
-        var i : Int = 0
+        var i: Int = 0
         val editText = findViewById<EditText>(R.id.answer)
         val score = findViewById<TextView>(R.id.score)
         val quizButton = findViewById<Button>(R.id.submit) as Button
 
         //Visst det er entries i databasen
-        if(personList?.size != 0) {
+        if (personList?.size != 0) {
 
             path = personList!!.get(i).picturePath
             name = personList.get(i).first_name
@@ -76,20 +76,26 @@ class QuizActivity : AppCompatActivity() {
             quizButton.setOnClickListener {
 
                 val inputSvar = editText.text.toString()
-                checkAnswer(inputSvar, name!!)
+                if (checkAnswer(inputSvar, name!!)) {
+                    updateScore()
+                    correctAnswerToast()
 
+                } else {
+                    wrongAnswerAlert(inputSvar, name!!)
+
+                }
 
                 //Score textView...
-                val textScore : String = resources.getString(R.string.scoreTxt)
-                score.text = textScore + ": " + theScore.toString() + "/" + (i+1)
+                val textScore: String = resources.getString(R.string.scoreTxt)
+                score.text = textScore + ": " + theScore.toString() + "/" + (i + 1)
 
 
 
-                if(i < personList.size -1) {
+                if (i < personList.size - 1) {
                     i = i.inc()
                 } else {
                     //Spillet er ferdig.
-                    gameFinishedAlert(theScore, i+1)
+                    gameFinishedAlert(theScore, i + 1)
                 }
 
                 //Henter på nytt
@@ -99,31 +105,31 @@ class QuizActivity : AppCompatActivity() {
                 imageView.setImageBitmap(bmImg)
 
 
-         }
+            }
+
+        }
 
     }
 
-    }
-
-    fun  updateScore() : Int {
+    fun updateScore(): Int {
         theScore = theScore.inc()
         return theScore
     }
 
-    fun gameFinishedAlert(score : Int, antall : Int){
+    fun gameFinishedAlert(score: Int, antall: Int) {
 
-        val builder: AlertDialog.Builder? = this?.let { AlertDialog.Builder(it)}
-        val gameFinishedTxt = resources.getString(R.string.yourScore) + score + "/" +  antall
+        val builder: AlertDialog.Builder? = this?.let { AlertDialog.Builder(it) }
+        val gameFinishedTxt = resources.getString(R.string.yourScore) + score + "/" + antall
 
         builder?.setMessage(gameFinishedTxt)?.setTitle(R.string.gameFinished)
 
         //Brukeren trykket på ok knappen
-        builder?.setPositiveButton(R.string.newGame){dialog, which ->
+        builder?.setPositiveButton(R.string.newGame) { dialog, which ->
             intent = Intent(this, QuizActivity::class.java)
             startActivity(intent)
         }
 
-        builder?.setNegativeButton(R.string.mainMenu) {dialog, which ->
+        builder?.setNegativeButton(R.string.mainMenu) { dialog, which ->
             intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
@@ -132,29 +138,25 @@ class QuizActivity : AppCompatActivity() {
         dialog?.show()
     }
 
-     fun checkAnswer(input: String, correct: String): Boolean {
-         if (input.equals(correct)) {
-             updateScore()
-             correctAnswerToast()
-             return true
-         } else {
-             wrongAnswerAlert(input, correct!!)
-
-             return false
-         }
-     }
+    fun checkAnswer(input: String, correct: String): Boolean {
+        if (input.equals(correct)) {
+            return true
+        } else {
+            return false
+        }
+    }
 
     //Pop-up boks for feil svar.
     fun wrongAnswerAlert(answer: String, correct: String) {
 
-        val builder: AlertDialog.Builder? = this?.let { AlertDialog.Builder(it)}
-        val alertMsg = resources.getString(R.string.correctAnswerIs) + correct +"!\n" +
-                   resources.getString(R.string.yourAnswerWas)+ answer
+        val builder: AlertDialog.Builder? = this?.let { AlertDialog.Builder(it) }
+        val alertMsg = resources.getString(R.string.correctAnswerIs) + correct + "!\n" +
+                resources.getString(R.string.yourAnswerWas) + answer
 
         builder?.setMessage(alertMsg)?.setTitle(R.string.wrongAnswerAlert)
 
         //Brukeren trykket på ok knappen
-        builder?.setPositiveButton("Ok"){dialog, which ->
+        builder?.setPositiveButton("Ok") { dialog, which ->
         }
 
         val dialog: AlertDialog? = builder?.create()

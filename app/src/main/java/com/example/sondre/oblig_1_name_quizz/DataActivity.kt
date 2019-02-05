@@ -34,7 +34,7 @@ class DataActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         //Deklarerer listen bestående av alle person objektene
-        val personList : List<Person>? = db?.personDao()?.getAll()
+        val personList: List<Person>? = db?.personDao()?.getAll()
 
 
         //Legg til bilde knapp
@@ -47,7 +47,7 @@ class DataActivity : AppCompatActivity() {
 
         //Start spill knapp
         val quizButton = findViewById<Button>(R.id.startGame)
-        quizButton.setOnClickListener{
+        quizButton.setOnClickListener {
             if (personList?.size != 0) {
                 intent = Intent(this, QuizActivity::class.java)
                 startActivity(intent)
@@ -59,8 +59,8 @@ class DataActivity : AppCompatActivity() {
 
 
         //Sjekker om listen er tom.
-        if(personList?.size != 0) {
-            for (i in 0.. personList!!.size-1) {
+        if (personList?.size != 0) {
+            for (i in 0..personList!!.size - 1) {
 
                 //Imageview og textview
                 val imgView = ImageView(this);
@@ -92,7 +92,7 @@ class DataActivity : AppCompatActivity() {
 
     }
 
-        fun deletePerson(person: Person) {
+    fun deletePerson(person: Person) {
         db?.personDao()?.delete(person)
         val toast = Toast.makeText(this, "Person deleted", Toast.LENGTH_LONG)
         toast.show()
@@ -101,26 +101,26 @@ class DataActivity : AppCompatActivity() {
     }
 
     fun addNewPictureAlert() {
-        val builder: AlertDialog.Builder? = this@DataActivity?.let { AlertDialog.Builder(it)}
+        val builder: AlertDialog.Builder? = this@DataActivity?.let { AlertDialog.Builder(it) }
 
         builder?.setMessage(R.string.AddNewPictureAlertMsg)
             ?.setTitle(R.string.addNewPictureAlertTitle)
 
-        builder?.setPositiveButton(R.string.newPhoto){dialog, which ->
+        builder?.setPositiveButton(R.string.newPhoto) { dialog, which ->
             //Brukeren trykket på ok knappen
             intent = Intent(this, AddPicture::class.java)
             startActivity(intent)
         }
 
         //TODO: Funker ikke enda...
-        builder?.setNegativeButton(R.string.existingPhoto) {dialog, which ->
+        builder?.setNegativeButton(R.string.existingPhoto) { dialog, which ->
 
         }
 
         //Avbryt knapp.
-       builder?.setNeutralButton(R.string.cancel) {dialog, which ->
-           Toast.makeText(applicationContext, R.string.canceled, Toast.LENGTH_SHORT).show()
-       }
+        builder?.setNeutralButton(R.string.cancel) { dialog, which ->
+            Toast.makeText(applicationContext, R.string.canceled, Toast.LENGTH_SHORT).show()
+        }
 
 
         val dialog: AlertDialog? = builder?.create()
@@ -128,15 +128,15 @@ class DataActivity : AppCompatActivity() {
     }
 
     //Alert hvis det ikke er lagt til noen bider...
-    fun noPicturesAlert(){
-        val builder: AlertDialog.Builder? = this?.let { AlertDialog.Builder(it)}
+    fun noPicturesAlert() {
+        val builder: AlertDialog.Builder? = this?.let { AlertDialog.Builder(it) }
 
         builder?.setMessage(R.string.noPictureMsg)?.setTitle(R.string.noPictureError)
 
-        builder?.setPositiveButton(R.string.addPicture){dialog, which ->
+        builder?.setPositiveButton(R.string.addPicture) { dialog, which ->
         }
 
-        builder?.setNegativeButton(R.string.cancel) {dialog, which -> }
+        builder?.setNegativeButton(R.string.cancel) { dialog, which -> }
 
         val dialog: AlertDialog? = builder?.create()
         dialog?.show()
