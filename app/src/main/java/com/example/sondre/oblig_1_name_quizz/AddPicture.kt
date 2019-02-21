@@ -55,7 +55,7 @@ class AddPicture : Activity() {
     private fun createImageFile(): File {
         // Create an image file name
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val storageDir: File = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(
             "JPEG_${timeStamp}_", /* prefix */
             ".jpg", /* suffix */
@@ -127,7 +127,7 @@ class AddPicture : Activity() {
 
 
             //Legger til personen i databasen
-            btn.setOnClickListener { v: View? ->
+            btn.setOnClickListener {
                 person.first_name = editText.text.toString()
                 person.picturePath = mCurrentPhotoPath
                 person.uid = 0
@@ -152,7 +152,7 @@ class AddPicture : Activity() {
     //
     fun addedToDataBaseAlert() {
 
-        val builder: AlertDialog.Builder? = this@AddPicture?.let { AlertDialog.Builder(it) }
+        val builder: AlertDialog.Builder? = this@AddPicture.let { AlertDialog.Builder(it) }
 
         builder?.setMessage(R.string.personAdded)?.setTitle(R.string.personAdded)
 

@@ -101,7 +101,7 @@ class DataActivity : AppCompatActivity() {
     }
 
     fun addNewPictureAlert() {
-        val builder: AlertDialog.Builder? = this@DataActivity?.let { AlertDialog.Builder(it) }
+        val builder: AlertDialog.Builder? = this@DataActivity.let { AlertDialog.Builder(it) }
 
         builder?.setMessage(R.string.AddNewPictureAlertMsg)
             ?.setTitle(R.string.addNewPictureAlertTitle)
@@ -129,7 +129,7 @@ class DataActivity : AppCompatActivity() {
 
     //Alert hvis det ikke er lagt til noen bider...
     fun noPicturesAlert() {
-        val builder: AlertDialog.Builder? = this?.let { AlertDialog.Builder(it) }
+        val builder: AlertDialog.Builder? = this.let { AlertDialog.Builder(it) }
 
         builder?.setMessage(R.string.noPictureMsg)?.setTitle(R.string.noPictureError)
 

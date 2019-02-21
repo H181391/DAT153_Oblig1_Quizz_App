@@ -69,16 +69,17 @@ class MainActivity : AppCompatActivity() {
         val prefs: SharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         val ownerText: String? = prefs.getString("owner", null)
         val ownerTxtView: TextView = findViewById<TextView>(R.id.owner)
+        var ownerName: String?
 
         if (ownerText != null) {
-            val name: String = prefs.getString("owner", "No owner defined")
+            ownerName = prefs.getString("owner", "No owner defined")
             ownerTxtView.setText("Logged in as: " + ownerText)
         } else {
             val editor: SharedPreferences.Editor = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE).edit()
-            var ownerName: String = ""
+
 
             //Alert hvor man skriver inn owner
-            val builder: AlertDialog.Builder? = this?.let { AlertDialog.Builder(it) }
+            val builder: AlertDialog.Builder? = this.let { AlertDialog.Builder(it) }
             builder?.setTitle("Owner")
 
             val input: EditText = EditText(this)
@@ -103,11 +104,11 @@ class MainActivity : AppCompatActivity() {
         val ownerTxtView: TextView = findViewById<TextView>(R.id.owner)
 
         val editor: SharedPreferences.Editor = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE).edit()
-        var ownerName: String = ""
+        var ownerName: String?
 
 
         //Alert hvor man skriver inn owner
-        val builder: AlertDialog.Builder? = this?.let { AlertDialog.Builder(it) }
+        val builder: AlertDialog.Builder? = this.let { AlertDialog.Builder(it) }
         builder?.setTitle("Owner")
 
         val input: EditText = EditText(this)
@@ -133,7 +134,7 @@ class MainActivity : AppCompatActivity() {
 
     //Alert hvis det ikke er lagt til noen bider...
     fun noPicturesAlert() {
-        val builder: AlertDialog.Builder? = this?.let { AlertDialog.Builder(it) }
+        val builder: AlertDialog.Builder? = this.let { AlertDialog.Builder(it) }
 
         builder?.setMessage(R.string.noPictureMsg)?.setTitle(R.string.noPictureError)
 

@@ -52,8 +52,8 @@ class QuizActivity : AppCompatActivity() {
         layout.addView(imageView)
 
 
-        var name: String? = ""
-        var path: String? = ""
+        var name: String?
+        var path: String?
 
 
         var i: Int = 0
@@ -118,7 +118,7 @@ class QuizActivity : AppCompatActivity() {
 
     fun gameFinishedAlert(score: Int, antall: Int) {
 
-        val builder: AlertDialog.Builder? = this?.let { AlertDialog.Builder(it) }
+        val builder: AlertDialog.Builder? = this.let { AlertDialog.Builder(it) }
         val gameFinishedTxt = resources.getString(R.string.yourScore) + score + "/" + antall
 
         builder?.setMessage(gameFinishedTxt)?.setTitle(R.string.gameFinished)
@@ -149,7 +149,7 @@ class QuizActivity : AppCompatActivity() {
     //Pop-up boks for feil svar.
     fun wrongAnswerAlert(answer: String, correct: String) {
 
-        val builder: AlertDialog.Builder? = this?.let { AlertDialog.Builder(it) }
+        val builder: AlertDialog.Builder? = this.let { AlertDialog.Builder(it) }
         val alertMsg = resources.getString(R.string.correctAnswerIs) + correct + "!\n" +
                 resources.getString(R.string.yourAnswerWas) + answer
 
