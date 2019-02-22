@@ -93,7 +93,7 @@ class AddPicture : Activity() {
     }
 
     //Etter bildet er tatt...
-    override fun onActivityResult(c: Int, r: Int, data: Intent) {
+    override fun onActivityResult(c: Int, r: Int, data: Intent?) {
         if (c == REQUEST_TAKE_PHOTO && r == RESULT_OK) {
             val person = Person()
             //val person = Person(uid = 0, first_name = "Atle", picturePath = mCurrentPhotoPath)
