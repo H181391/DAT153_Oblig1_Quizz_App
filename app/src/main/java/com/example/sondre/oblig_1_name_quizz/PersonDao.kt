@@ -13,7 +13,7 @@ interface PersonDao {
 
 
         @Query("SELECT * FROM person WHERE uid LIKE :Id")
-        fun findByName(Id: Int) : Person
+        fun findById(Id: Int) : Person
 
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         fun insertPerson(person: Person)

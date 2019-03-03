@@ -134,6 +134,8 @@ class DataActivity : AppCompatActivity() {
         builder?.setMessage(R.string.noPictureMsg)?.setTitle(R.string.noPictureError)
 
         builder?.setPositiveButton(R.string.addPicture) { dialog, which ->
+
+            addNewPictureAlert()
         }
 
         builder?.setNegativeButton(R.string.cancel) { dialog, which -> }

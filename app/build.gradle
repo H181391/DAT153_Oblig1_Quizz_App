@@ -45,7 +45,10 @@ dependencies {
 
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-
+    androidTestImplementation('com.android.support.test.espresso:espresso-intents:2.2') {
+        // Necessary to avoid version conflicts
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
 
 
         def room_version = "1.1.1"

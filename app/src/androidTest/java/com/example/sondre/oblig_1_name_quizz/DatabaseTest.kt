@@ -36,8 +36,8 @@ class DatabaseTest {
 
         dbTest?.personDao()?.insertPerson(Atle)
         dbTest?.personDao()?.insertPerson(Sondre)
-        var personFromDatabase = dbTest?.personDao()?.findByName(1)
-        var personFromDatabase2 = dbTest?.personDao()?.findByName(2)
+        var personFromDatabase = dbTest?.personDao()?.findById(1)
+        var personFromDatabase2 = dbTest?.personDao()?.findById(2)
 
         //Check to see if person added to database
         assertEquals(Atle, personFromDatabase)
@@ -50,8 +50,8 @@ class DatabaseTest {
         dbTest?.personDao()?.delete(Atle)
         dbTest?.personDao()?.delete(Sondre)
 
-        personFromDatabase = dbTest?.personDao()?.findByName(1)
-        personFromDatabase2 = dbTest?.personDao()?.findByName(2)
+        personFromDatabase = dbTest?.personDao()?.findById(1)
+        personFromDatabase2 = dbTest?.personDao()?.findById(2)
 
         personList = dbTest?.personDao()?.getAll()
         //Check if the persons are deleted
@@ -65,7 +65,7 @@ class DatabaseTest {
     fun addPersonDatabase() {
         val Atle = Person(1, "atle", "picPath")
         dbTest?.personDao()?.insertPerson(Atle)
-        val personFromDatabase =  dbTest?.personDao()?.findByName(1)
+        val personFromDatabase =  dbTest?.personDao()?.findById(1)
         assertEquals(Atle, personFromDatabase)
     }
 
@@ -73,11 +73,11 @@ class DatabaseTest {
     fun deletePersonDatabase() {
         val Atle = Person(1, "atle", "picPath")
         dbTest?.personDao()?.insertPerson(Atle)
-        var personFromDatabase =  dbTest?.personDao()?.findByName(1)
+        var personFromDatabase =  dbTest?.personDao()?.findById(1)
         assertEquals(Atle, personFromDatabase)
 
         dbTest?.personDao()?.delete(Atle)
-        personFromDatabase =  dbTest?.personDao()?.findByName(1)
+        personFromDatabase =  dbTest?.personDao()?.findById(1)
         assertEquals(null, personFromDatabase)
 
     }

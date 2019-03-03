@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     private var db: AppDatabase? = null
 
+
     companion object {
         val PREF_NAME: String = "PrefFile"
 
@@ -161,19 +162,8 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    fun openSharedPreferences() {
-        val builder: AlertDialog.Builder? = this?.let { AlertDialog.Builder(it) }
-        val alertMsg = "Logged in as "
 
-        builder?.setMessage(alertMsg)?.setTitle("Shared Preferences")
 
-        //Brukeren trykket på ok knappen
-        builder?.setPositiveButton("Ok") { dialog, which ->
-        }
-
-        val dialog: AlertDialog? = builder?.create()
-        dialog?.show()
-    }
 
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
